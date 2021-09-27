@@ -6,11 +6,11 @@ parentDiv.style.cssText = "justify-content: space-between;margin: 15px;"
 container.appendChild(parentDiv);
 document.body.appendChild(parentDiv);
 
-var apikey = "b7d11cabc8af26d6aa46acfa5eb82f24";
-var url = `http://api.countrylayer.com/v2/all?access_key=${apikey}`;
+// var apikey = "b7d11cabc8af26d6aa46acfa5eb82f24";
+var url = `https://restcountries.com/v3/all`;
 
 const showWeatherInfo = (country) => {
-    document.getElementById("title").innerText=country.name;
+    document.getElementById("title").innerText=country.name.common;
     var url=`https://api.openweathermap.org/data/2.5/weather?q=${country.capital}&appid=b9695604e3d206ec7afff8e288d8a818`;
     fetch(url)
     .then(function(data){
@@ -43,7 +43,7 @@ var allCountries = fetch(url)
             var head = document.createElement("div");
             head.setAttribute("class", "card-header");
             head.style.cssText = 'background-color:black;';
-            head.innerHTML = country.name;
+            head.innerHTML = country.name.common;
             
             // Adding country details inside card body
             var body = document.createElement("div");
@@ -51,7 +51,7 @@ var allCountries = fetch(url)
             body.style.cssText = 'padding:10px;background-image: linear-gradient(to left, #112f3b, #e4cea6);';
             // Adding flag image
             const flag = document.createElement('img');
-            flag.setAttribute('src', `https://restcountries.com/data/png/${country.alpha3Code.toLowerCase()}.png`);
+            flag.setAttribute('src', `https://restcountries.com/data/png/${country.cca3.toLowerCase()}.png`);
             flag.style.cssText = 'width: 80%; height: 180px; margin-bottom: 8px; margin-top: 15px;'
             body.appendChild(flag);
             var capital = document.createElement('div');
@@ -61,7 +61,7 @@ var allCountries = fetch(url)
             region.innerHTML = `Region : ${country.region}`
             body.appendChild(region);
             var countryCode = document.createElement('div');
-            countryCode.innerHTML = `Country Code: ${country.alpha3Code}`
+            countryCode.innerHTML = `Country Code: ${country.cca3}`
             body.appendChild(countryCode);
 
             // Adding button for weather info            
